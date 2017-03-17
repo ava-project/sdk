@@ -7,7 +7,7 @@ keywords = [
 ]
 
 setup(
-    name='ava-sdk',
+    name='avasdk',
     version=sdk.__version__,
     description=sdk.__doc__,
     author=sdk.__author__,
