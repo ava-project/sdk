@@ -12,7 +12,7 @@ setup(
     description=sdk.__doc__,
     author=sdk.__author__,
     license='Apache',
-    url=dbbackup.__url__,
+    url=sdk.__url__,
     keywords=keywords,
     packages=find_packages(),
     classifiers=[
