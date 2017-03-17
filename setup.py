@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-import sdk
+import avasdk
 
 keywords = [
     'ava', 'sdk',
@@ -8,11 +8,11 @@ keywords = [
 
 setup(
     name='avasdk',
-    version=sdk.__version__,
-    description=sdk.__doc__,
-    author=sdk.__author__,
+    version=avasdk.__version__,
+    description=avasdk.__doc__,
+    author=avasdk.__author__,
     license='Apache',
-    url=sdk.__url__,
+    url=avasdk.__url__,
     keywords=keywords,
     packages=find_packages(),
     classifiers=[
