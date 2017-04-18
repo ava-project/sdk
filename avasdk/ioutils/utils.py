@@ -1,3 +1,4 @@
+from .exceptions import RuntimeError
 import os, shutil, json, zipfile
 
 # Format the output.
@@ -6,8 +7,7 @@ def format_output(*args):
     for arg in args:
         result += str(arg)
         result += str(":")
-    result = result[:-1] + str("]: ")
-    return result
+    return result[:-1] + str("]: ")
 
 # Removes the given file if it exists, raise an error otherwise.
 # @param: string (/path/to/the /file/to/remove)
@@ -15,7 +15,7 @@ def remove_file(path):
     if os.path.isfile(path) == True:
         os.remove(path)
     else:
-        raise
+        raise RuntimeError('invalid path')
 
 
 # Handler for removing a directory and all its content
@@ -27,7 +27,7 @@ def remove_directory(path):
     if os.path.isdir(path) == True:
         shutil.rmtree(path)
     else:
-        raise
+        raise RuntimeError('Invalid path')
 
 
 # Unzip the file pointed by 'path' to extract its to content to the given destination
@@ -42,7 +42,7 @@ def unzip(path, destination):
         zip_ref.extractall(destination)
         zip_ref.close()
     else:
-        raise
+        raise RuntimeError('Failed to unzip at the given location')
 
 
 # Parse a json file and store key and value into the given dictionary.
