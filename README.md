@@ -9,7 +9,7 @@ Useful function for AVA project
 You can install it with pip :
 
 ```bash
-$ pip install --upgrade git+git://github.com/ava-project/sdk.git
+$ sudo python3 -m pip install --upgrade git+https://github.com/ava-project/sdk
 ```
 
 ## Run tests
@@ -18,7 +18,7 @@ $ pip install --upgrade git+git://github.com/ava-project/sdk.git
 $ ./runtests.sh
 ```
 
-## Usage 
+## Usage
 
 #### Config file
 

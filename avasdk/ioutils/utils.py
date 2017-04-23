@@ -47,7 +47,7 @@ def remove_directory(path):
 def unzip(path, destination):
     if os.path.isfile(path) == True:
 
-        if os.path.isdir(destination) == True
+        if os.path.isdir(destination) == True:
             archive = zipfile.ZipFile(path, 'r')
             result = archive.testzip()
 
