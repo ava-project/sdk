@@ -21,5 +21,5 @@ def validate_plugin(config):
         try:
             validator_function(config)
         except ValidationError as error:
-            errors.append(ValidationException.message)
+            errors.append(error.message)
     return errors
