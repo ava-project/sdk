@@ -3,16 +3,9 @@ import unittest
 from avasdk.exceptions import ValidationError
 from avasdk.plugin_validators import name_validator
 
-class TestNameValidatorConfing(unittest.TestCase):
+from . import ConfigSetup
 
-    def setUp(self):
-        self.no_name_config = {}
-        self.wrong_name_config = {
-            'name': 'wrong_n@me',
-        }
-        self.good_config = {
-            'name': 'goodname'
-        }
+class TestNameValidatorConfing(ConfigSetup, unittest.TestCase):
 
     def test_has_name(self):
         with self.assertRaises(ValidationError):
