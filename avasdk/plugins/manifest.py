@@ -5,6 +5,22 @@ from ..exceptions import ValidationError
 
 schema = {
     "+name": "string",
+    "+description": "string",
+    "+version": "string",
+    "+author": "string",
+    "+commands": [
+        {
+            "+name": "string",
+            "+phonetic": "string",
+            "+exec": "string"
+        }
+    ],
+    "options": {
+        "exemple1": "string",
+        "exemple2": valideer.Range("number", min_value=0)
+    },
+    "+tags": ["string"],
+    "+build": "boolean"
 }
 
 validator = valideer.parse(schema)
