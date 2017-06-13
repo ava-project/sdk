@@ -16,10 +16,6 @@ schema = {
             "+description": "string"
         }
     ],
-    "options": {
-        "exemple1": "string",
-        "exemple2": valideer.Range("number", min_value=0)
-    },
     "+tags": ["string"],
     "+build": "boolean"
 }
