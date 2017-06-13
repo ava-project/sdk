@@ -5,6 +5,19 @@ from ..exceptions import ValidationError
 
 schema = {
     "+name": "string",
+    "+description": "string",
+    "+version": "string",
+    "+author": "string",
+    "+commands": [
+        {
+            "+name": "string",
+            "+phonetic": "string",
+            "+exec": "string",
+            "+description": "string"
+        }
+    ],
+    "+tags": ["string"],
+    "+build": "boolean"
 }
 
 validator = valideer.parse(schema)
