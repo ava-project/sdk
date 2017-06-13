@@ -12,7 +12,8 @@ schema = {
         {
             "+name": "string",
             "+phonetic": "string",
-            "+exec": "string"
+            "+exec": "string",
+            "+description": "string"
         }
     ],
     "options": {
