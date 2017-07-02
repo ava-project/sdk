@@ -66,7 +66,7 @@ def unzip(path, destination):
         else:
             raise RuntimeError(__name__, unzip.__name__, "Invalid path (" + destination + "), no such directory.")
     else:
-        raise RuntimeError(__name__, unzip.__name__, "Invalid path (" + path + "), no such file.")0
+        raise RuntimeError(__name__, unzip.__name__, "Invalid path (" + path + "), no such file.")
 
 def load_manifest_to_dictionary(path, dictionary):
     """
