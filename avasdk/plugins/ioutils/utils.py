@@ -1,7 +1,6 @@
 from ...exceptions import RuntimeError
 import os, shutil, json, zipfile
 
-
 def format_output(*args):
     """
     Format the output.
@@ -16,7 +15,6 @@ def format_output(*args):
         result += str(":")
     return result[:-1] + str("]: ")
 
-
 def remove_file(path):
     """
     Removes the given file if it exists, raise an error otherwise.
@@ -30,7 +28,6 @@ def remove_file(path):
     else:
         raise RuntimeError(__name__, remove_file.__name__, "Cannot remove (" + path + "), no such file.")
 
-
 def remove_directory(path):
     """
     Handler for removing a directory and all its content
@@ -43,7 +40,6 @@ def remove_directory(path):
         shutil.rmtree(path)
     else:
         raise RuntimeError(__name__, remove_directory.__name__, "Cannot remove (" + path + "), no such directory.")
-
 
 def unzip(path, destination):
     """
@@ -70,24 +66,61 @@ def unzip(path, destination):
         else:
             raise RuntimeError(__name__, unzip.__name__, "Invalid path (" + destination + "), no such directory.")
     else:
-        raise RuntimeError(__name__, unzip.__name__, "Invalid path (" + path + "), no such file.")
+        raise RuntimeError(__name__, unzip.__name__, "Invalid path (" + path + "), no such file.")0
 
-
-def parse_json_file_to_dictionary(path, dictionary):
+def load_manifest_to_dictionary(path, dictionary):
     """
-    Parse a json file and store key and value into the given dictionary.
+    Loads the manifest.json of the plugin folder specified by 'path' to the given
+    dictionary.
+
         @params:
-            - path: string (/path/to/the/directory/containing/the/json/file)
-            - dictionary: the dictionary to fill with data.
+            - path: string (/path/to/the/folder/containing/the/json/file)
+            - dictionary: the dictionary to fill with the data.
 
         @behave: raise an error if the path is not pointing to a directory.
     """
-    if os.path.isdir(path) == True:
+    if os.path.isdir(path):
         for file in os.listdir(path):
             if file.find(".json") > 0:
-                with open(path + '/' + file) as json_file:
+                with open(os.path.join(path, file)) as json_file:
                     data = json.load(json_file)
                 for key, value in data.items():
                     dictionary[key] = value
     else:
         raise RuntimeError(__name__, parse_json_file_to_dictionary.__name__, "Invalid path (" + path + "), no such directory.")
+
+def determine_language(path, name, dictionary, skip):
+    """
+    Determines in which language the plugin located at 'path' is written, and adds
+    its 'name' as well as the language to the given 'dictionary'.
+
+    For example, if the specified folder contains a plugin named 'hello_world' written
+    in C++, the dictionary will look like following:
+
+        {'hello_world': {'lang': 'cpp'}}
+
+    @param:
+        - dictionary: dictionary (the dictionary to fill)
+        - path: string (path to the plugin folder)
+        - name: string (the plugin name)
+        - skip: array of strings  (extension to skip i.e 'json')
+
+    """
+    if os.path.isdir(path):
+        for file in os.listdir(path):
+            if file == 'setup.py':
+                continue
+            if file.find(".") > 0 and file[file.find(".") + 1:] not in skip:
+                dictionary[name] = {'lang': file[file.find(".") + 1:]}
+
+
+def load_plugin(path, name):
+    """
+    Returns a well formed dictionary built from the manifest.json found in the plugin
+    folder located at 'path/name'.
+    """
+    dictionary = {}
+    target = os.path.join(path, name)
+    determine_language(target, name, dictionary, ['json', 'md', 'txt'])
+    load_manifest_to_dictionary(target, dictionary[name])
+    return dictionary
