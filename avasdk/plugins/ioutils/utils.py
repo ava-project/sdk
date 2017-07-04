@@ -1,5 +1,9 @@
+import json
+import os
+import shutil
+import zipfile
+
 from ...exceptions import RuntimeError
-import os, shutil, json, zipfile
 
 def format_output(*args):
     """
