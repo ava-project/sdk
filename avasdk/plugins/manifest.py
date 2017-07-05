@@ -8,7 +8,7 @@ schema = {
     "+description": "string",
     "+version": "string",
     "+author": "string",
-    "+source": "string"
+    "+source": "string",
     "+commands": [
         {
             "+name": "string",
