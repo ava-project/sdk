@@ -16,8 +16,8 @@ schema = {
             "+description": "string"
         }
     ],
-    "+tags": ["string"],
-    "+build": "boolean"
+    "tags": ["string"],
+    "build": "boolean"
 }
 
 validator = valideer.parse(schema)
