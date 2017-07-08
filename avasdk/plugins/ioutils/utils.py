@@ -5,19 +5,14 @@ import zipfile
 
 from ...exceptions import RuntimeError
 
-def format_output(*args):
+def split_string(string_to_split, separator):
     """
-    Format the output.
-        @param:
-            - args: the strings to format
+    """
+    result = string_to_split.split(separator)
+    if len(result) == 1:
+        return result[0], None
+    return result[0], ' '.join(result[1:])
 
-        @result: format the given string as following '[string1:string2:....:stringN]:'
-    """
-    result = "["
-    for arg in args:
-        result += str(arg)
-        result += str(":")
-    return result[:-1] + str("]: ")
 
 def remove_file(path):
     """
