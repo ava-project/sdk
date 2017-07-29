@@ -1,4 +1,4 @@
-import sys, os
+
 
 class PythonModel(object):
     """
@@ -6,7 +6,7 @@ class PythonModel(object):
     """
     def __init__(self, name="AVA_Python_Plugin_Model"):
         super(PythonModel, self).__init__()
-        PythonModel._commands = { "name" : self.get_name, "list" : self.list_commands }
+        PythonModel._commands = { "name" : self.get_name, "list" : self.list_commands, "commands" : self.get_commands, "interaction" : self.wait_for_user }
         PythonModel._name = name;
 
     def set_commands_list(self, command_list) :
@@ -21,3 +21,6 @@ class PythonModel(object):
     def list_commands(self) :
         for c in self._commands :
             print(c)
+
+    def wait_for_user(self, arg=None):
+        print('Waiting for user interaction !!!')
