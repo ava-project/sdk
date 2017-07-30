@@ -1,5 +1,11 @@
 
-def build_response(raw):
+def build_response(author, result=None, display=None):
     """
     """
-    pass
+    response = {
+        'type': 'response',
+        'from': author,
+        'tts': result if result else (author + ' just finished to proceed.'),
+        'display': display
+    }
+    return response, '__END_OF_RESPONSE__'

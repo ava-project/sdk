@@ -1,5 +1,11 @@
 
-def build_request(raw):
+def build_request(author, payload=None, display=None):
     """
     """
-    pass
+    request = {
+        'type': 'request',
+        'from': author,
+        'tts': payload if payload else (author + ' is waiting for your answer in order to proceed.'),
+        'display': display
+    }
+    return request, '__END_OF__REQUEST__'
