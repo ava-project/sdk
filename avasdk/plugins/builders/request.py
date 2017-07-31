@@ -8,4 +8,4 @@ def build_request(author, payload=None, display=None):
         'tts': payload if payload else (author + ' is waiting for your answer in order to proceed.'),
         'display': display
     }
-    return request, '__END_OF__REQUEST__'
+    return request

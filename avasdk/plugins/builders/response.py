@@ -8,4 +8,4 @@ def build_response(author, result=None, display=None):
         'tts': result if result else (author + ' just finished to proceed.'),
         'display': display
     }
-    return response, '__END_OF_RESPONSE__'
+    return response
