@@ -1,4 +1,5 @@
-
+from .builders import build_request
+from .log import log, REQUEST, DELIMITER
 
 class PythonModel(object):
     """
@@ -7,7 +8,7 @@ class PythonModel(object):
     def __init__(self, name="AVA_Python_Plugin_Model"):
         super(PythonModel, self).__init__()
         PythonModel._commands = { "name" : self.get_name, "list" : self.list_commands, "commands" : self.get_commands, "interaction" : self.wait_for_user }
-        PythonModel._name = name;
+        PythonModel._name = name
 
     def set_commands_list(self, command_list) :
         self._commands = command_list;
@@ -22,5 +23,7 @@ class PythonModel(object):
         for c in self._commands :
             print(c)
 
-    def wait_for_user(self, arg=None):
-        print('Waiting for user interaction !!!')
+    def wait_for_user(self, author, message=None, display=None):
+        print(build_request(author, message, display))
+        log(request=True)
+        return input()
