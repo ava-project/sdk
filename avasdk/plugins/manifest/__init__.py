@@ -1,6 +1,6 @@
 import valideer
 from valideer.base import ValidationError as ValideerValidationError
-from ..exceptions import ValidationError
+from ...exceptions import ValidationError
 
 schema = {
     "+name": "string",
