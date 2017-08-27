@@ -1,9 +1,9 @@
 def popup_macos(title, content):
-    import subprocess
-    applescript = """display dialog {1} with title {0} with icon caution buttons {"OK"} """.format(
-        title, content)
-    subprocess.call("osascript -e '{}'".format(applescript))
-
+    # import os
+    # script = 'osascript -e '
+    # args = "'display notification \"{}\" with title \"{}\"'".format(content, title)
+    # os.system(script + args)
+    print(content)
 
 def popup(title, content):
     import tkinter
