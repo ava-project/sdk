@@ -5,6 +5,7 @@ import zipfile
 
 from ...exceptions import RuntimeError
 
+
 def split_string(string_to_split, separator):
     """
     """
@@ -25,7 +26,9 @@ def remove_file(path):
     if os.path.isfile(path) == True:
         os.remove(path)
     else:
-        raise RuntimeError(__name__, remove_file.__name__, "Cannot remove (" + path + "), no such file.")
+        raise RuntimeError(__name__, remove_file.__name__,
+                           "Cannot remove (" + path + "), no such file.")
+
 
 def remove_directory(path):
     """
@@ -38,7 +41,9 @@ def remove_directory(path):
     if os.path.isdir(path) == True:
         shutil.rmtree(path)
     else:
-        raise RuntimeError(__name__, remove_directory.__name__, "Cannot remove (" + path + "), no such directory.")
+        raise RuntimeError(__name__, remove_directory.__name__,
+                           "Cannot remove (" + path + "), no such directory.")
+
 
 def unzip(path, destination):
     """
@@ -57,15 +62,20 @@ def unzip(path, destination):
             result = archive.testzip()
 
             if result is not None:
-                raise RuntimeError(__name__, unzip.__name__, "Error corrupted archive.")
+                raise RuntimeError(__name__, unzip.__name__,
+                                   "Error corrupted archive.")
 
             archive.extractall(destination)
             archive.close()
 
         else:
-            raise RuntimeError(__name__, unzip.__name__, "Invalid path (" + destination + "), no such directory.")
+            raise RuntimeError(
+                __name__, unzip.__name__,
+                "Invalid path (" + destination + "), no such directory.")
     else:
-        raise RuntimeError(__name__, unzip.__name__, "Invalid path (" + path + "), no such file.")
+        raise RuntimeError(__name__, unzip.__name__,
+                           "Invalid path (" + path + "), no such file.")
+
 
 def load_manifest_to_dictionary(path, dictionary):
     """
@@ -86,7 +96,9 @@ def load_manifest_to_dictionary(path, dictionary):
                 for key, value in data.items():
                     dictionary[key] = value
     else:
-        raise RuntimeError(__name__, parse_json_file_to_dictionary.__name__, "Invalid path (" + path + "), no such directory.")
+        raise RuntimeError(__name__, parse_json_file_to_dictionary.__name__,
+                           "Invalid path (" + path + "), no such directory.")
+
 
 def determine_language(path, name, dictionary, skip):
     """

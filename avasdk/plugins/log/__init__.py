@@ -1,23 +1,24 @@
+def popup_macos(title, content):
+    import subprocess
+    applescript = """display dialog {1} with title {0} with icon caution buttons {"OK"} """.format(
+        title, content)
+    subprocess.call("osascript -e '{}'".format(applescript))
+
 
 def popup(title, content):
     import tkinter
     import tkinter.scrolledtext
     win = tkinter.Tk()
     win.title(title)
-    frame = tkinter.Frame(
-        master = win,
-        bg = '#808000'
-    )
+    frame = tkinter.Frame(master=win, bg='#808000')
     frame.pack(fill='both', expand='yes')
     editArea = tkinter.scrolledtext.ScrolledText(
-        master = frame,
-        wrap   = tkinter.WORD,
-        width  = 80,
-        height = 40
-    )
+        master=frame, wrap=tkinter.WORD, width=80, height=40)
     editArea.pack(padx=10, pady=10, fill=tkinter.BOTH, expand=True)
     editArea.insert(tkinter.INSERT, content)
+    editArea.configure(state="disabled")
     win.mainloop()
+
 
 class Logger(object):
     """
@@ -50,11 +51,22 @@ class Logger(object):
 
     @staticmethod
     def unexpected_error(self):
-        return 'An unexpected error occured with the {0}. The error has been print.'.format(self.__class__.__name__)
+        return 'An unexpected error occured with the {0}. The error has been print.'.format(
+            self.__class__.__name__)
 
     @staticmethod
     def popup(title, content):
+        import platform
+        if platform.system() == 'Darwin':
+            import threading
+            t = threading.Thread(target=popup_macos, args=(title, content))
+            t.daemon = True
+            t.start()
+            return
         import multiprocessing
-        p = multiprocessing.Process(name='AVA.popup.{0}'.format(title), target=popup, args=(title, content))
+        p = multiprocessing.Process(
+            name='AVA.popup.{0}'.format(title),
+            target=popup,
+            args=(title, content))
         p.daemon = True
         p.start()

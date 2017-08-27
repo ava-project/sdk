@@ -1,4 +1,3 @@
-
 def build_response(author, result=None, display=None):
     """
     """
