@@ -1,4 +1,24 @@
 
+def popup(title, content):
+    import tkinter
+    import tkinter.scrolledtext
+    win = tkinter.Tk()
+    win.title(title)
+    frame = tkinter.Frame(
+        master = win,
+        bg = '#808000'
+    )
+    frame.pack(fill='both', expand='yes')
+    editArea = tkinter.scrolledtext.ScrolledText(
+        master = frame,
+        wrap   = tkinter.WORD,
+        width  = 80,
+        height = 40
+    )
+    editArea.pack(padx=10, pady=10, fill=tkinter.BOTH, expand=True)
+    editArea.insert(tkinter.INSERT, content)
+    win.mainloop()
+
 class Logger(object):
     """
     """
@@ -31,3 +51,10 @@ class Logger(object):
     @staticmethod
     def unexpected_error(self):
         return 'An unexpected error occured with the {0}. The error has been print.'.format(self.__class__.__name__)
+
+    @staticmethod
+    def popup(title, content):
+        import multiprocessing
+        p = multiprocessing.Process(name='AVA.popup.{0}'.format(title), target=popup, args=(title, content))
+        p.daemon = True
+        p.start()
