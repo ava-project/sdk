@@ -1,9 +1,11 @@
 def popup_macos(title, content):
-    # import os
-    # script = 'osascript -e '
-    # args = "'display notification \"{}\" with title \"{}\"'".format(content, title)
-    # os.system(script + args)
-    print(content)
+    result = None
+    if isinstance(content, str):
+        result = content.split('\n').pop(-2)
+    elif isinstance(content, list):
+        result = content[-1]
+    import osascript
+    osascript.osascript("""display notification \"{}\" with title \"{}\"""".format(result, title))
 
 def popup(title, content):
     import tkinter
@@ -58,10 +60,7 @@ class Logger(object):
     def popup(title, content):
         import platform
         if platform.system() == 'Darwin':
-            import threading
-            t = threading.Thread(target=popup_macos, args=(title, content))
-            t.daemon = True
-            t.start()
+            popup_macos(title, content)
             return
         import multiprocessing
         p = multiprocessing.Process(
