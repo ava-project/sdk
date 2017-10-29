@@ -33,10 +33,12 @@ def remove_file(path):
 def remove_directory(path):
     """
     Handler for removing a directory and all its content
-        @param:
-            - path: string (/path/to/the/directory/to/remove)
 
-        @behave: raise an error if the specified directory does not exist.
+    param:
+        - path: string (/path/to/the/directory/to/remove)
+
+    behave:
+        - raise an error if the specified directory does not exist.
     """
     if os.path.isdir(path) == True:
         shutil.rmtree(path)
@@ -48,12 +50,13 @@ def remove_directory(path):
 def unzip(path, destination):
     """
     Unzip the file pointed by 'path' to extract its to content to the given destination
-        @params:
-            - path: string (/path/to/the/file/to/unzip)
-            - destination: string (/path/to/extract/the/zip)
+    params:
+        - path: string (/path/to/the/file/to/unzip)
+        - destination: string (/path/to/extract/the/zip)
 
-        @behave: raise an error if either the path or the destination is invalid.
-        @behave: raise an error if the archive is corrupted.
+    behave:
+        - raise an error if either the path or the destination is invalid.
+        - raise an error if the archive is corrupted.
     """
     if os.path.isfile(path) == True:
 
@@ -82,9 +85,9 @@ def load_manifest_to_dictionary(path, dictionary):
     Loads the manifest.json of the plugin folder specified by 'path' to the given
     dictionary.
 
-        @params:
-            - path: string (/path/to/the/folder/containing/the/json/file)
-            - dictionary: the dictionary to fill with the data.
+    params:
+        - path: string (/path/to/the/folder/containing/the/json/file)
+        - dictionary: the dictionary to fill with the data.
 
         @behave: raise an error if the path is not pointing to a directory.
     """
@@ -110,7 +113,7 @@ def determine_language(path, name, dictionary, skip):
 
         {'hello_world': {'lang': 'cpp'}}
 
-    @param:
+    param:
         - dictionary: dictionary (the dictionary to fill)
         - path: string (path to the plugin folder)
         - name: string (the plugin name)
@@ -132,6 +135,6 @@ def load_plugin(path, name):
     """
     dictionary = {}
     target = os.path.join(path, name)
-    determine_language(target, name, dictionary, ['json', 'md', 'txt'])
+    determine_language(target, name, dictionary, ['json', 'md', 'txt', 'so', 'h'])
     load_manifest_to_dictionary(target, dictionary[name])
     return dictionary
